@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Result</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fafafa;
+      }
+      header {
+        padding: 30px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      header > span {
+        font-size: 24px;
+        font-weight: 600;
+      }
+      .result {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .result__info {
+        font-size: 15px;
+        margin: 15px 0;
+      }
+      .go-back {
+        background-color: #304ffe;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 11px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in;
+      }
+      .go-back:hover {
+        background-color: #0026ca;
+      }
+      section {
+        padding: 15px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      section > h1 {
+        margin-bottom: 20px;
+      }
+      .suggestions {
+        width: 85%;
+      }
+      .suggestions__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .suggestions__header > a {
+        border: 1px solid #babdbe;
+        border-radius: 10px;
+        padding: 5px 20px;
+        font-size: 11px;
+        background-color: transparent;
+        transition: background-color 0.3s ease-in;
+      }
+      .suggestions__header > a:hover {
+        background-color: #babdbe;
+      }
+      .job {
+        width: 100%;
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid #eceff1;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      }
+      .job__title {
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+      .job__company {
+        font-size: 11px;
+      }
+      .detail-btn {
+        outline: none;
+        border: none;
+        background-color: #304ffe;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 11px;
+        transition: background-color 0.3s ease-in;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+      .detail-btn:hover {
+        background-color: #0026ca;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span>Find Your Dream Job</span>
+      <div class="result">
+        <span class="result__info"> About {{term}}, job Listed Here!</span>
+        <span class="go-back">
+          <a href="/">Go Back</a>
+        </span>
+      </div>
+    </header>
+    <section>
+      <div class="suggestions">
+        <div class="suggestions__header">
+          <h1>Suggestions</h1>
+          <a href="/export?job={{term}}">Export to CSV</a>
+        </div>
+        {% for data in datalist %}
+        <div class="job">
+          <div class="job__info">
+            <p class="job__title">{{data.title}}</p>
+            <p class="job__company">{{data.company}}</p>
+          </div>
+          <button class="detail-btn">
+            <a target="_blank" href="{{data.link}}">DETAIL</a>
+          </button>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+  </body>
+</html>
